@@ -106,11 +106,17 @@ public class ProgressViewCircleButton: UIButton {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.circleProgressView?.startProgress()
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
+            self.transform  = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: nil)
     }
     
     // End progress when the button is no longer touched
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
+            self.transform = CGAffineTransform.identity
+        }, completion: nil)
         self.circleProgressView?.stopProgress()
     }
     
@@ -139,7 +145,7 @@ public class ViewController: UIViewController {
         let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         self.alertButton = ProgressViewCircleButton(frame: frame, totalDuration: 10.0, normalColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), highlightedColor: #colorLiteral(red: 0.745098054409027, green: 0.156862750649452, blue: 0.0745098069310188, alpha: 1.0), fillColor: UIColor.clear)
         // Add selectors for various types of touches
-        self.alertButton.addTarget(self, action: #selector(alertButtonTouchUpInside), for: .touchUpInside)
+        self.alertButton.addTarget(self, action: #selector(alertButtonTouchUp), for: .touchUpInside)
         self.alertButton.addTarget(self, action: #selector(alertButtonTouchDown), for: .touchDown)
         // Add alertButton to view, and position it
         self.view.addSubview(self.alertButton)
@@ -150,9 +156,8 @@ public class ViewController: UIViewController {
         alertButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    // TODO: Make fix for touch cancel
     // Called when you touch the button, then remove finger inside of button
-    func alertButtonTouchUpInside() {
+    func alertButtonTouchUp() {
         let title = String(format: "%.2f Seconds", self.timeCounter)
         showAlert(viewController: self, title: title, message: "You held button down this long")
         self.resetTimer()
@@ -186,4 +191,6 @@ public class ViewController: UIViewController {
 let vc = ViewController()
 PlaygroundPage.current.liveView = vc
 PlaygroundPage.current.needsIndefiniteExecution = true
+PlaygroundPage.current.liveView
+
 
