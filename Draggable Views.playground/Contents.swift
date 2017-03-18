@@ -33,7 +33,7 @@ public class Circle: UIView {
         self.frame.origin.y = translation.y
     }
     
-    // TODO: Create a simple protocol that adds bounce effects when touched
+    // TODO: Create a  protocol that adds bounce effects when touched
     
 }
 
