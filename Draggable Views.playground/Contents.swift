@@ -49,24 +49,7 @@ public class Circle: UIView  {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    // Start progress when the button is touched
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
-            self.transform  = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }, completion: nil)
-    }
-    
-    // End progress when the button is no longer touched
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        event.
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
-            self.transform = CGAffineTransform.identity
-        }, completion: nil)
-    }
+
     // TODO: Create a simple protocol that adds bounce effects when touched
     
 }
