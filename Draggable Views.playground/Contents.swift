@@ -1,22 +1,27 @@
 import UIKit
 
 
-public class Circle: UIView {
+// Allows views to be draggable
+extension UIView {
     
-    required public init(radius: CGFloat) {
-        super.init(frame: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2))
-        // This variable cannot be global, becuase of a strong reference?
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panning))
+    public func configDragging(allowDragging: Bool) {
+        allowDragging ? self.setupDragging()
+            : self.removeDragging()
+    }
+    
+    private func setupDragging() {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.panning))
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
-        self.layer.cornerRadius = self.frame.width / 2
-    }
-
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
-    public func panning(gesture: UIPanGestureRecognizer) {
+    private func removeDragging() {
+        self.gestureRecognizers?.removeAll()
+        self.isUserInteractionEnabled = false
+    }
+    
+    @objc private func panning(gesture: UIPanGestureRecognizer) {
+        print("Gesture recognized!")
         switch gesture.state {
         case .began:
             // Every time the button is pressed, grab the current frame position of the view, and update it based on that
@@ -32,20 +37,51 @@ public class Circle: UIView {
         self.frame.origin.x = translation.x
         self.frame.origin.y = translation.y
     }
+}
+
+public class Circle: UIView  {
     
-    // TODO: Create a  protocol that adds bounce effects when touched
+    required public init(radius: CGFloat) {
+        super.init(frame: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2))
+        self.layer.cornerRadius = self.frame.width / 2
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // Start progress when the button is touched
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
+            self.transform  = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: nil)
+    }
+    
+    // End progress when the button is no longer touched
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        event.
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
+            self.transform = CGAffineTransform.identity
+        }, completion: nil)
+    }
+    // TODO: Create a simple protocol that adds bounce effects when touched
     
 }
 
 public class ViewController: UIViewController {
     
     let circle = Circle(radius: 50)
+    let blueColor = UIColor(colorLiteralRed: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        self.circle.configDragging(allowDragging: true)
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(self.circle)
-        self.circle.backgroundColor = UIColor.darkGray
+        self.circle.backgroundColor = self.blueColor
     }
 }
 
