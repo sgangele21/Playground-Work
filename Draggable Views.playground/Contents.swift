@@ -1,27 +1,47 @@
 import UIKit
 
 
+private protocol Draggable {
+    // Can't put access modifiers in protocols
+    func configDragging(allowDragging: Bool)
+    
+    func setupDragging()
+    func removeDragging()
+    func panning(gesture: UIPanGestureRecognizer)
+    
+}
+
+private protocol Bouncable {
+    func configBouncing(allowBouncing: Bool)
+    
+    func setupBouncing()
+    func removeBouncing()
+    func tapping(gesture: UITapGestureRecognizer)
+}
+
+
+
 // Allows views to be draggable
-extension UIView {
+extension UIView: Draggable, UIGestureRecognizerDelegate {
     
     public func configDragging(allowDragging: Bool) {
         allowDragging ? self.setupDragging()
             : self.removeDragging()
     }
     
-    private func setupDragging() {
+    fileprivate func setupDragging() {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.panning))
+        gesture.delegate = self
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
     }
     
-    private func removeDragging() {
+    fileprivate func removeDragging() {
         self.gestureRecognizers?.removeAll()
         self.isUserInteractionEnabled = false
     }
     
-    @objc private func panning(gesture: UIPanGestureRecognizer) {
-        print("Gesture recognized!")
+    @objc fileprivate func panning(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
             // Every time the button is pressed, grab the current frame position of the view, and update it based on that
@@ -37,21 +57,70 @@ extension UIView {
         self.frame.origin.x = translation.x
         self.frame.origin.y = translation.y
     }
+    
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
 }
 
-public class Circle: UIView  {
+
+// Allows views to be bouncy upon a press
+extension UIView: Bouncable {
+    
+    public func configBouncing(allowBouncing: Bool) {
+        allowBouncing ? self.setupBouncing()
+            : self.removeBouncing()
+    }
+    
+    fileprivate func setupBouncing() {
+        let control = UIControl(frame: self.frame)
+        control.addTarget(self, action: #selector(tapping), for: .touchDown)
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(tapping))
+        gesture.delegate = self
+        self.isUserInteractionEnabled = true
+        gesture.minimumPressDuration = 0
+        self.addGestureRecognizer(gesture)
+    }
+    
+    fileprivate func removeBouncing() {
+        self.gestureRecognizers?.removeAll()
+        self.isUserInteractionEnabled = false
+    }
+    
+    @objc fileprivate func tapping(gesture: UITapGestureRecognizer) {
+        print("Tapping")
+        switch gesture.state {
+        case .began:
+            self.configBounce(enlarge: true)
+            break
+        case .ended:
+            self.configBounce(enlarge: false)
+            break
+        default:
+            break
+        }
+    }
+    
+    private func configBounce(enlarge: Bool) {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.25, options: [.allowUserInteraction, .curveEaseInOut], animations: {() in
+            self.transform  = enlarge ? CGAffineTransform(scaleX: 1.1, y: 1.1) : CGAffineTransform.identity
+        }, completion: nil)
+    }
+}
+
+
+public class Circle: UIView {
     
     required public init(radius: CGFloat) {
         super.init(frame: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2))
         self.layer.cornerRadius = self.frame.width / 2
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // TODO: Create a simple protocol that adds bounce effects when touched
-    
 }
 
 public class ViewController: UIViewController {
@@ -62,11 +131,13 @@ public class ViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.circle.configDragging(allowDragging: true)
+        self.circle.configBouncing(allowBouncing: true)
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(self.circle)
         self.circle.backgroundColor = self.blueColor
     }
 }
+
 
 import PlaygroundSupport
 
