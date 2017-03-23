@@ -27,3 +27,13 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
     
   ###### TODO's
    * Figure out whether _center_ property of view can be used to move view around
+
+
+  <br><br>
+### Async Image Downloading
+
+  ###### Shows
+   * How to asynchronously download an image given a URL path to an image
+    
+  ###### TODO's
+   * Insert a UISlider to see the effects of downloading an image synchronously vs asynchronously
