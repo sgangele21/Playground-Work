@@ -37,3 +37,28 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
     
   ###### TODO's
    * Insert a UISlider to see the effects of downloading an image synchronously vs asynchronously
+   
+   
+     <br><br>
+### Singletons
+
+  ###### Shows
+   * What singletons are
+   * How to create and use a singleton  
+   
+   
+     <br><br>
+### KVO's
+
+  ###### Shows
+   * How KVO's work
+   * How to create a KVO
+   * Practical use for KVO
+   
+   
+     <br><br>
+### Timer Delegate
+
+  ###### Shows
+   * A simple use of how delegates work through a timer
+   * How to avoid a retain cycle when implementing Delegates
