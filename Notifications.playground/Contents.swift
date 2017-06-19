@@ -1,4 +1,3 @@
-
 // Practicing with NSNotfications
 import UIKit
 
@@ -28,6 +27,7 @@ public class Tiger: Predator {
         print("Hunting the prey now")
         NotificationCenter.default.post(name: NSNotification.Name("PredatorHunting"), object: nil)
     }
+    
 }
 
 
@@ -51,9 +51,10 @@ let tigress = Tiger(age: .adult)
 let wildebeest = Wildebeest(age: .baby)
 // Currently nothing is printing
 
-// Right here, a notification is posted by a completely different class, and helps save the wildebeast by notifying it to run
-// Getting more technical, notifcations allow communication between one two or more objects, without them ever knowing they existed. This can be powerful when dealing with things like logging out of a system. when you log out, you can have some iher entity perform some task, without having to coupe the two objects.But, this makes it hard to follow logic, as the posting and observing can be in two different files
+
 tigress.hunt()
+// Right here, a notification is posted by a completely different class, and helps save the wildebeast by notifying it to run
+// Getting more technical, notifcations allow communication between one two or more objects, without them ever knowing they existed. This can be powerful when dealing with things like logging out of a system. when you log out, you can have some other entity perform some task, without having to coupling of objects. But, this makes it hard to follow logic, as the posting and observing can be in two different files
 
 
 
