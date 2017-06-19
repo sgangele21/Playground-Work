@@ -62,3 +62,13 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
   ###### Shows
    * A simple use of how delegates work through a timer
    * How to avoid a retain cycle when implementing Delegates
+   
+        <br><br>
+### Notifications
+
+  ###### Shows
+   * A simple example of predator and preys using Notifications and NSNotifications
+   * Shows benefits and use cases of using Notifications
+   * Shows how to post and observe notifications
+   ###### TODO's
+   * Add all posting in protocol extension
