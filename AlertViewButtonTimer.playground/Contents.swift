@@ -63,7 +63,7 @@ public class CircleProgressView {
         self.shapeLayer.strokeStart = 0.0
         // Add circle on top of mainView's layers
         self.mainView.layer.insertSublayer(self.shapeLayer, at: 0)
-    }
+    } 
     
     public func startProgress() {
         self.currentDuration = 0.0
