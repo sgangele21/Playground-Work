@@ -72,3 +72,13 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
    * Shows how to post and observe notifications
    ###### TODO's
    * Add all posting in protocol extension
+   
+           <br><br>
+### Asynchronous Functions
+
+  ###### Shows
+   * A simple example of an image loading, and tasks going on at the same time
+   * Shows simple use case of concurrent tasks
+   * Shows how to create a simple thread from the global pool of threads, and execute work items on that thread
+   ###### TODO's
+   * Dive in deeper, and give a pracitcal example
