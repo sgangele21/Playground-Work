@@ -82,3 +82,14 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
    * Shows how to create a simple thread from the global pool of threads, and execute work items on that thread
    ###### TODO's
    * Dive in deeper, and give a pracitcal example
+   
+         <br><br>
+### Interview Questions
+
+  ###### Shows
+   * How you can answer interview questions straight from your iPad
+   * How to specifically answer this question, in an efficient manner (Speed-Wise)
+   * Simple for-loop, and iterating through an array
+   ###### TODO's
+   * Add to this, answering more iOS interview questions
+
