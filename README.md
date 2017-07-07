@@ -93,3 +93,9 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
    ###### TODO's
    * Add to this, answering more iOS interview questions
 
+     <br><br>
+### Triangle View
+
+  ###### Shows
+   * How to create a subclass of UIView
+   * How to use UIBezier Path to create shapes, and polylines
