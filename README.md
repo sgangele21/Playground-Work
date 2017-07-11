@@ -99,3 +99,12 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
   ###### Shows
    * How to create a subclass of UIView
    * How to use UIBezier Path to create shapes, and polylines
+   
+    <br><br>
+### Progres Swipe View
+
+  ###### Shows
+   * How to create a touch gesture programmatically
+   * How to work with UIProgressView
+   * How to get values from touch gesture
+   * The basics of how to replace a manual slider with touch and swiping
