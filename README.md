@@ -28,7 +28,6 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
   ###### TODO's
    * Figure out whether _center_ property of view can be used to move view around
 
-
   <br><br>
 ### Async Image Downloading
 
@@ -100,7 +99,7 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
    * How to create a subclass of UIView
    * How to use UIBezier Path to create shapes, and polylines
    
-    <br><br>
+   <br><br>
 ### Progres Swipe View
 
   ###### Shows
