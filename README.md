@@ -107,3 +107,12 @@ iOS Features coded using Playgrounds on iPad :iphone:<br><br>
    * How to work with UIProgressView
    * How to get values from touch gesture
    * The basics of how to replace a manual slider with touch and swiping
+   
+   <br><br>
+### Retain Cycle
+
+  ###### Shows
+   * How a retain cycle is created
+   * Simple example of delegation
+   * Breif touch on ARC, and how it works
+   * The use of the `weak` keyword
